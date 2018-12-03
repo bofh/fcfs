@@ -1,0 +1,36 @@
+[package]
+name = "fcfs"
+version = "0.0.1"
+authors = ["Roma Sokolov", "Alexander Zhuravlev"]
+edition = '2018'
+
+[profile.dev]
+panic = "abort"
+debug = true
+opt-level = "s"
+lto = true
+codegen-units = 1
+incremental = false
+overflow-checks = false # libm
+
+[profile.release]
+panic = "abort"
+opt-level = "z"
+codegen-units = 1
+debug = false
+lto = true
+incremental = false # nalgebra
+
+[dependencies]
+cortex-m = {version = "0.5.8", features = ["inline-asm", "const-fn"]}
+cortex-m-rt = "0.6.5"
+
+[dependencies.ehal]
+features = ["unproven"]
+version = "0.2.1"
+package = "embedded-hal"
+
+[dependencies.hal]
+version = "0.9.1"
+package = "alt-stm32f30x-hal"
+features = ["rt"]
